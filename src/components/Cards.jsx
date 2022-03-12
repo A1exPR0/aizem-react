@@ -21,21 +21,27 @@ const data={
 };
 
   return (
-      <div>
+    <Wrapper >
     {data.cards.map((card)=>{
         return(
-            <Wrapper>
+          
             <Card key={card.id} name={card.name} color={card.color}/>     
-            </Wrapper>
+           
         );
     })}
-   
-    </div>
+    </Wrapper>
+
   )
 }
 
 const Wrapper = styled.div`
-    background-color:red;
+    //background-color:red;
+    display:flex;
+    justify-content:center;
+    align-content:center;
+    margin:auto;
+    flex-direction:column;
+    width:80%;
     
 `;
 
