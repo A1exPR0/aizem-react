@@ -1,11 +1,14 @@
 import Cards from "../components/Cards";
 import React from 'react'
+import Slider from "../components/Slider";
 
 function Home() {
   return (
     <div>
-        <h1>Home</h1>
+        <Slider/>
+        
         <Cards/>
+
     </div>
   )
 }
