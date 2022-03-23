@@ -12,7 +12,7 @@ function Cards() {
 const getWorks = async()=>{
    const api=await fetch('http://localhost:1337/api/works?populate=thumbnail') 
    const data=await api.json();
-   console.log(works);
+   //console.log(works);
    setWorks(data.data);
 }
 
