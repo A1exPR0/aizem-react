@@ -1,0 +1,21 @@
+mask:url(#mask2);
+
+<svg> 
+    <defs>
+                <mask  id="mask2">
+                  {/* style={{maskType:"luminance"}} */}
+                <circle cx={maskPos.x} cy={maskPos.y} r="40" stroke="black" strokeWidth="3" fill="red" />
+                </mask>
+                </defs>
+            </svg>
+
+
+            <div id="mask" style={{position:"fixed",left:cursor.x,top:cursor.y,width:"20vw",height:"20vw",backgroundColor:"transparent",borderColor:"black",borderWidth:"1px",borderStyle:"solid",zIndex:3,transform:"translate(-50%,-50%)",borderRadius:"50%"}}></div>
+ 
+
+
+
+<div key={pair.id} className="slider-items">
+                                <img src={"http://localhost:1337"+pair.noDesign.data.attributes.url} alt=""/>
+                                <img src={"http://localhost:1337"+pair.withDesign.data.attributes.url} alt=""/>
+                                </div>

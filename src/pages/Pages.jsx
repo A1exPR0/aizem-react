@@ -1,8 +1,8 @@
 import Home from './Home'
 
-function Pages() {
+function Pages(props) {
   return (
-    <Home/>
+    <Home cursor={props.cursor} settings={props.settings}/>
   )
 }
 
