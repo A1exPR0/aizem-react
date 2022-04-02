@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import styles from "./SliderPair.module.scss"
-
+import myContext from '../../Context'
 
 function SliderPair(props) {
-    const server=props.settings.server;
+
+    const {server, cursor, updateCursor}=useContext(myContext);
+    // const server=props.settings.server;
     const sliderData=props.sliderData;
     const [Images , setImages]=useState({noDesign:"",withDesign:""});
     // const [i , setI]=useState(props.number);

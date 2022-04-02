@@ -1,27 +1,48 @@
-import React, { useState } from "react";
-import Pages  from "./pages/Pages";
+import React, { useRef } from "react";
+import Pages from "./pages/Pages";
+
+import {ContextProvider} from "./Context"
+import Navigation from "./components/header/Navigation"
+import {BrowserRouter} from 'react-router-dom'
+
 
 
 function App() {
-  const [cursor,setCursor]=useState({});
-  // const [maskPos,setMaskPos]=useState({x:0,y:0});
-  // const Cursor= React.createContext(cursor)
-  const onMoveHandler=(e)=>{
-    setCursor({x:e.pageX,y:e.pageY});
-    // setMaskPos({x:e.pageX,y:e.pageY});
-  }
 
-  const server="10.0.0.169";
-  // const server="localhost";
-
-  return (
-    
-<div className='App'onMouseMove={onMoveHandler}>
-<Pages cursor={cursor} settings={{server:server}}/>
-
-</div>
-  );
+  const appref=useRef();
+    return (
+        <div className='App' ref={appref}>
+            <BrowserRouter>
+            <ContextProvider> 
+              <Navigation appref={appref}/>
+              {/* Header */}
+                <Pages appref={appref}/>
+              {/* Footer */} 
+            </ContextProvider>
+            </BrowserRouter>
+            </div>
+    );
 }
 
+
+
+
+
+
+// (e)=>{clickHandler(e,".page","/p2")}
+
+//       return(
+//         <div className="App" ref={appref}>
+//           <BrowserRouter>
+//           <Nav appref={appref}/>
+//           <Routes>
+//             <Route path="/" element={<Page1 appref={appref}/>}/>
+//             <Route path="/p2"element={<Page2 appref={appref}/>}/>
+//             <Route path="/p3"element={<Page3 appref={appref}/>}/>
+//             </Routes>
+//           </BrowserRouter>
+//         </div>
+// )
+// }
 export default App;
 

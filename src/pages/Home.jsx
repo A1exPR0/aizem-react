@@ -1,13 +1,18 @@
 // import Cards from "../components/Cards";
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import NewSlider from "../components/slider/NewSlider";
+
 import gsap from 'gsap';
+import myContext from '../Context';
+
+
 
 function Home(props) {
-const server=props.settings.server;
-// let sliderData=[];
+
+const {server,updateCursor}=useContext(myContext);
+
 const[sliderData,setSliderData]=useState([]);
-// console.log("Rerender");
+
 const [counter,setCounter]=useState(0);
 
 const sliderRef=useRef();
@@ -15,9 +20,20 @@ const q = gsap.utils.selector(sliderRef);
 
 const timerID=useRef();
 
+const q2 = gsap.utils.selector(props.appref);
+
 useEffect(()=>{
   getSliderData();
+  gsap.fromTo(q2(".page"),{
+    opacity:0,
+    y:50
+  },{
+      opacity:1,
+      y:0
+  });
 },[])
+
+
 
 useEffect(()=>{
   timerID.current=setInterval(()=>{
@@ -81,11 +97,9 @@ useEffect(()=>{
 
 // console.log(sliderData);
   return (
-    <div ref={sliderRef}>
-        <NewSlider cursor={props.cursor} settings={props.settings} sliderData={sliderData} counter={counter}/>
-        
+    <div className='page' ref={sliderRef} onMouseMove={updateCursor}>
+        <NewSlider sliderData={sliderData} counter={counter}/>
         {/* <Cards/> */}
-
     </div>
   )
 }
