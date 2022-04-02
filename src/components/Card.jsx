@@ -15,32 +15,40 @@ class Card extends React.Component {
   }
 
 updateRotation=(e)=>{
+// console.log(e.nativeEvent.layerX,e.nativeEvent.layerY);
   const width=this.ref2.current.clientWidth;
   const height=this.ref2.current.clientHeight;
-  const ox=e.nativeEvent.offsetX;
-  const oy=e.nativeEvent.offsetY;
+  const ox=e.nativeEvent.layerX;//+e.target.offsetLeft;
+  const oy=e.nativeEvent.layerY;//+e.target.offsetTop;
   const factorX=-0.05;
-  const factorY=0.07;
+  const factorY=-0.17;
   const parX=(ox-width/2)*factorX;
   const parY=(oy-height/2)*factorY;
   // this.setState({
   //   x:parX,
   //   y:parY}
   // )
-  const parZ=(parX*parY)/height*2;
+  const parZ=(parX*parY)/height*3;
+// console.log(ox,oy);
 //  console.log(e.nativeEvent.offsetX,e.nativeEvent.offsetY);
   // console.log(parX,parY,parZ);
   // console.log(width,height);
-  gsap.to(this.q("div"),{rotateX:parX,rotateY:parY,rotateZ:parZ,ease:"power.in"});
+  // if(ox>50 && oy>50)
+  gsap.to(this.q(".card"),{rotateX:parY,rotateY:parX,rotateZ:parZ,ease:"power.in"});
+
 
   // this.setState({
   //   x:ox,
   //   y:oy
   // })
+
 } 
 
 restoreCard(){
-  gsap.to(this.q("div"),{rotateX:0,rotateY:0,rotateZ:0,ease:"none"});
+  setTimeout(
+    
+    ()=>{gsap.to(this.q(".card"),{rotateX:0,rotateY:0,rotateZ:0,ease:"power.out",duration:2});}
+    ,200);
 }
 
 render(){
@@ -55,7 +63,7 @@ render(){
             backgroundColor:this.props.color,
         }
     }> 
-        <h2 >{this.props.name}</h2>
+        <h2>{this.props.name}</h2>
         <img src={this.props.src} alt="" />
        
     </CardWrapper>
@@ -69,6 +77,7 @@ padding:5rem;
 border-radius:1rem;
 width:400px;
 color:white;
+
 box-shadow: 3px 3px 20px rgba(0,0,0,0.25);
 img {
   width:100%;

@@ -15,11 +15,11 @@ function Navigation(props) {
       e.preventDefault();
       switch (location.pathname) {
         case "/":
-          gsap.to([q(".page p"),q(".page")],{
+          gsap.to([q(".page"),q(".page")],{
             opacity:0,
             y:50,
             stagger:0.1,
-            rotateX:90,
+            // rotateX:90,
             // height:0,
             onComplete:()=>{
                 navigate(dest);
@@ -28,11 +28,11 @@ function Navigation(props) {
         });
           break;
         case "/projects":
-          gsap.to(q(".page"),{
+          gsap.to(q(".card"),{
             opacity:0,
-            y:50,
-            stagger:0.5,
-            rotateX:90,
+            x:50,
+            stagger:0.1,
+            // rotateX:90,
             // height:0,
             onComplete:()=>{
                 navigate(dest);
