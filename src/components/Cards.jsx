@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card';
 import styled from "styled-components"
 import gsap from 'gsap';
+import cardStyles from "./Card.module.scss"
 
 
 function Cards(props) {
@@ -11,8 +12,14 @@ function Cards(props) {
 
     useEffect(()=>{
         getWorks();
+       
+
+    },[]); 
+
+    useEffect(()=>{
+      if(works.length){
         console.log("animation");
-        gsap.fromTo(q2(".card"),{
+        gsap.fromTo(q2("."+cardStyles.card),{
             opacity:0,
             y:50
           },{
@@ -21,8 +28,9 @@ function Cards(props) {
               stagger:0.3,
               duration:0.8
           });
-
-    },[]); 
+      }
+  },[works]); 
+    
 
 const getWorks = async()=>{
 
@@ -65,6 +73,9 @@ const Wrapper = styled.div`
     flex-direction:column;
     width:80%;
     position:relative;
+    .card{
+      opacity:0;
+    }
 
     
 `;

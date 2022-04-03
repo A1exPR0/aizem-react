@@ -5,12 +5,6 @@ import Cards from '../components/Cards'
 function Projects(props) {
 
 
-
-
-  useEffect(()=>{
- 
-  },[])
-
   return (
     <div className="page">
     <Cards appref={props.appref}/>

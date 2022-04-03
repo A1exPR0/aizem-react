@@ -30,7 +30,7 @@ function NewSlider(props) {
             <feGaussianBlur stdDeviation="3" />
           </filter>
           <mask id="mask">
-            <circle cx={cursor.x-viewWidth*0.3} cy={cursor.y} fill="white" r={"70px"} width="100" height="100px" filter="url(#mask-blur)" />
+            <circle cx={cursor.x-viewWidth*0.3} cy={cursor.y} fill="white" r={"70px"} width="100px" height="100px" filter="url(#mask-blur)" />
           </mask>
       </defs>  
 

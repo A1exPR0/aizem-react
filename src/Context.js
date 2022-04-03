@@ -1,8 +1,11 @@
 import gsap from 'gsap';
 import {createContext,useRef,useState} from 'react';
-
+import Home from './pages/Home';
+import Projects from './pages/Projects';
 
 const myContext=createContext();
+
+
 
 export function ContextProvider({children}){
   // const server="10.0.0.169";
