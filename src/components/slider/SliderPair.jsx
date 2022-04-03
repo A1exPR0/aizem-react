@@ -15,11 +15,20 @@ function SliderPair(props) {
     useEffect(()=>{
         // console.log(sliderData);
        if (sliderData.length>0){
-        setImages({
-            noDesign:"http://"+server+":1337"+sliderData[props.counter].noDesign.data.attributes.url,
-            withDesign:"http://"+server+":1337"+sliderData[props.counter].withDesign.data.attributes.url
+           if(sliderData[props.counter].noDesign.data.attributes.formats.large===undefined) 
+            {
+            setImages({
+                noDesign:"http://"+server+":1337"+sliderData[props.counter].noDesign.data.attributes.url,
+                withDesign:"http://"+server+":1337"+sliderData[props.counter].withDesign.data.attributes.url
 
-        });
+                });
+            }
+            else
+            setImages({
+                noDesign:"http://"+server+":1337"+sliderData[props.counter].noDesign.data.attributes.formats.large.url,
+                withDesign:"http://"+server+":1337"+sliderData[props.counter].withDesign.data.attributes.formats.large.url
+
+            });
        }
         
     },[sliderData.length,props.counter]); 

@@ -80,7 +80,7 @@ function Navigation(props) {
     <NavLink onClick={(e)=>{pageChange(e,"/projects");}} to='/projects'>Проекты</NavLink> */}
     
     {routes.map((route)=>(
-      <NavLink className={styles.a} key={route.i} onClick={(e)=>{pageChange(e,route.path);}} to={route.path}>{route.name}</NavLink>
+      <NavLink className={({ isActive }) => styles.a +" "+(isActive ? styles.active : "")}activeClassName={styles.active} key={route.i} onClick={(e)=>{pageChange(e,route.path);}} to={route.path}>{route.name}</NavLink>
     ))}
     
     </div>
@@ -88,3 +88,5 @@ function Navigation(props) {
 }
 
 export default Navigation
+
+// className=

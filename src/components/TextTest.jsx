@@ -112,7 +112,7 @@ const q=gsap.utils.selector(props.appref);
         // console.log(styles);
         rotateText();
 
-      },7000)
+      },5000)
       return(()=>{
         clearInterval(timerId);
       })

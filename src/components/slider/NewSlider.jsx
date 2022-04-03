@@ -1,5 +1,5 @@
 
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './NewSlider.module.scss'
 import SliderPair from './SliderPair'
 import myContext from '../../Context'
@@ -8,12 +8,25 @@ function NewSlider(props) {
   const {server,cursor,updateCursor}=useContext(myContext);
 
   const svgRef=useRef();
-  // console.log(svgRef);
+  
+  const [svgHW,setSvgHW]=useState({});
+  useEffect(()=>{
+    let el=document.querySelector("."+styles.svg);
+    let elStyles=getComputedStyle(el);
+    let svgWidth=elStyles.width;
+    let svgHeight=elStyles.height;
+    svgHeight=Number(svgHeight.slice(0,svgHeight.length-2));
+    svgWidth=Number(svgWidth.slice(0,svgWidth.length-2));
+    setSvgHW({w:svgWidth,h:svgHeight});
+  },[]);
+
   const viewWidth=window.visualViewport.width;
   const viewHeight=window.visualViewport.height;
   
 
   const test=false;
+
+
 
     return (
     <div>
@@ -30,7 +43,7 @@ function NewSlider(props) {
             <feGaussianBlur stdDeviation="3" />
           </filter>
           <mask id="mask">
-            <circle cx={cursor.x-viewWidth*0.3} cy={cursor.y} fill="white" r={"70px"} width="100px" height="100px" filter="url(#mask-blur)" />
+            <circle cx={cursor.x-(viewWidth-(svgHW.w!==undefined?svgHW.w:0))} cy={cursor.y-(viewHeight*0.9-(svgHW.h!==undefined?svgHW.h:0))} fill="white" r={"70px"} width="100px" height="100px" filter="url(#mask-blur)" />
           </mask>
       </defs>  
 
