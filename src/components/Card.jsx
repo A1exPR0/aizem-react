@@ -3,6 +3,21 @@ import styled from 'styled-components';
 import styles from './Card.module.scss'
 import {gsap} from "gsap"
 
+
+const settings={
+  alphaMult:0.3,
+  minY:15,
+  maxY:-15,
+  minX:-12,
+  maxX:12,
+  rotateDuration:0.15, // in s
+  rotateFactor:60,
+  rotateDelay:0.02,   // in s
+  restoreTimeOut:200, // in ms
+  restoreDuration:2   // in s
+
+}
+
 class Card extends React.Component {
   constructor(props){
     super(props);
@@ -16,26 +31,7 @@ class Card extends React.Component {
   }
 
 updateRotation=(e)=>{
-// console.log(e.nativeEvent.layerX,e.nativeEvent.layerY);
-  // const width=this.ref2.current.clientWidth;
-  // const height=this.ref2.current.clientHeight;
-  // console.log(e.pageY);
-  // const ox=e.nativeEvent.layerX;//+e.target.offsetLeft;
-  // const oy=e.nativeEvent.layerY;//+e.target.offsetTop;
-  // const factorX=-0.15;
-  // const factorY=-0.1;
-  // const parX=(ox-width/2)*factorX;
-  // const parY=(oy-height/2)*factorY;
-  // // this.setState({
-  // //   x:parX,
-  // //   y:parY}
-  // // )
-  // const parZ=(parX*parY)/height*3;
-// console.log(ox,oy);
-//  console.log(e.nativeEvent.offsetX,e.nativeEvent.offsetY);
-  // console.log(parX,parY,parZ);
-  // console.log(width,height);
-  // if(ox>50 && oy>50)
+
     let itemContainer=e.currentTarget;
 
 
@@ -45,55 +41,40 @@ updateRotation=(e)=>{
 		var itemY = itemContainer.offsetTop+itemContainer.offsetParent.offsetTop;
 		var itemW = itemContainer.clientWidth;
 		var itemH = itemContainer.clientHeight;
-    // console.log(e);
-    // console.log("for cursor pageX:"+pageX+" pageY:"+pageY);
-    // console.log("for element width:"+itemW+" height:"+itemH);
-    // console.log("for element offsetX:"+itemX+" offsetY:"+itemY);
+
 		var percentX = (pageX-itemX)/itemW*100;
 		var percentY = (pageY-itemY)/itemH*100;
-    // console.log("percentX:"+percentX+" percentY:"+percentY);
     
-		var minY = 7, maxY = -7, diffY = minY-maxY;
-		var rotateY = minY-percentX/60*diffY;
-    rotateY = rotateY<maxY ? maxY : rotateY;
-    rotateY = rotateY>minY ? minY : rotateY;
-		var minX = -9, maxX = 9, diffX = minX-maxX;
-		var rotateX = minX-percentY/60*diffX;
-    rotateX = rotateX<minX ? minX : rotateX;
-    rotateX = rotateX>maxX ? maxX : rotateX;
-    // console.log("rotateX:"+rotateX+" rotateY:"+rotateY);
+    let diffY = settings.minY-settings.maxY;
+		var rotateY = settings.minY-percentX/settings.rotateFactor*diffY;
+    rotateY = rotateY<settings.maxY ? settings.maxY : rotateY;
+    rotateY = rotateY>settings.minY ? settings.minY : rotateY;
+	  let diffX = settings.minX-settings.maxX;
+		var rotateX = settings.minX-percentY/settings.rotateFactor*diffX;
+    rotateX = rotateX<settings.minX ? settings.minX : rotateX;
+    rotateX = rotateX>settings.maxX ? settings.maxX : rotateX;
+
     let bg="";
-    let alpha=Math.abs(percentX-50)/50*0.2;
-    // console.log(alpha);
+    let alpha=Math.abs(percentX-50)/50*settings.alphaMult;
 
     if(percentX>50) bg="radial-gradient(circle at center, rgba(0, 0, 0, "+alpha+"), transparent 50%)";
     else bg="radial-gradient(circle at center, rgba(255, 255, 255, "+alpha+"), transparent 50%)";
 
-    gsap.to(this.q("."+styles.card),{rotateX:rotateX,rotateY:rotateY,ease:"power.in",duration:0.1});
+    gsap.to(this.q("."+styles.card),{rotateX:rotateX,rotateY:rotateY,ease:"none",duration:settings.rotateDuration,delay:settings.rotateDelay});
     gsap.to(this.q("."+styles.light),{top:itemH/2,left:pageX-itemX,opacity:1,background:bg});
-
-
-  // this.setState({
-  //   x:ox,
-  //   y:oy
-  // })
 
 } 
 
 restoreCard(){
   setTimeout(
     ()=>{
-      console.log("Tick");
-      gsap.to(this.q("."+styles.card),{rotateX:0,rotateY:0,rotateZ:0,ease:"power.out",duration:2});
+      gsap.to(this.q("."+styles.card),{rotateX:0,rotateY:0,rotateZ:0,ease:"power.out",duration:settings.restoreDuration});
       gsap.to(this.q("."+styles.light),{opacity:0});
     }
-    ,200);
+    ,settings.restoreTimeOut);
 }
 
 render(){
-
-  // const {x,y} = this.state;
-  // const shadow=toString(x)+"px "+toString(y)+"px 15px rgba(0,0,0,0.50)";
   return (
    
     <div ref={this.ref1} style={{margin:"20px"}}>
@@ -112,17 +93,5 @@ render(){
   )
 }
 }
-// const CardWrapper = styled.div`
-// padding:5rem;
-// border-radius:1rem;
-// width:400px;
-// color:white;
-
-// box-shadow: 3px 3px 20px rgba(0,0,0,0.25);
-// img {
-//   width:100%;
-//   height:auto;  
-//   }
-// `;
 
 export default Card

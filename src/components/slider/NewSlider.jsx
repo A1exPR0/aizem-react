@@ -4,6 +4,13 @@ import styles from './NewSlider.module.scss'
 import SliderPair from './SliderPair'
 import myContext from '../../Context'
 
+const settings={
+  yCompOffset:0.95,
+  maskRadius:80,
+  maskBlockSize:400,
+  maskBlur:5
+}
+
 function NewSlider(props) {
   const {server,cursor,updateCursor}=useContext(myContext);
 
@@ -40,10 +47,10 @@ function NewSlider(props) {
     <svg ref={svgRef} className={styles.svg} xmlns="http://www.w3.org/2000/svg" >
       <defs>
           <filter id="mask-blur">
-            <feGaussianBlur stdDeviation="3" />
+            <feGaussianBlur stdDeviation={settings.maskBlur} />
           </filter>
           <mask id="mask">
-            <circle cx={cursor.x-(viewWidth-(svgHW.w!==undefined?svgHW.w:0))} cy={cursor.y-(viewHeight*0.9-(svgHW.h!==undefined?svgHW.h:0))} fill="white" r={"70px"} width="100px" height="100px" filter="url(#mask-blur)" />
+            <circle cx={cursor.x-(viewWidth-(svgHW.w!==undefined?svgHW.w:0))} cy={cursor.y-(viewHeight*settings.yCompOffset-(svgHW.h!==undefined?svgHW.h:0))} fill="white" r={settings.maskRadius} width={settings.maskBlockSize} height={settings.maskBlockSize} filter="url(#mask-blur)" />
           </mask>
       </defs>  
 

@@ -3,6 +3,10 @@
     margin-left:auto;
     height:80vh;
     display: block;
+    position: absolute;
+    top:0;
+    right:0;
+    z-index: 3;
     g{
         width: 100vw;
     }

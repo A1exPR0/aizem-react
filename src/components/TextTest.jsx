@@ -1,18 +1,38 @@
 import gsap from 'gsap';
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from "./TextTest.module.scss"
 
 
   function TextTest(props) {
 
- 
+    const [isRevealed,setIsRevealed]=useState(false);
+    
+    const textArr=["Web Design", "Strategy","Design Sprint","Branding"];
+    
+    const settings = {
+        staggerOut: 0.06,
+        durationOut: 0.4,
+        staggerIn: 0.1,
+        durationIn: 1,
+        y: 40,
+        rotate: 100,
+        trOrIn: "",
+        trOrOut: "",
+        ease: "back.out", // "power2.out" "slow" - need to register
+
+        interval:5000, // in ms
+        staggerReveal:0.3,
+        durationReveal:0.7,
+        xReveal:-50
+        // ease: "power2.out",
+    }
+
+
     const divRef=useRef();
-    let textArr=["Web Design", "Strategy","Design Sprint","Branding"];
 
     const appendWrappedText=(str,init=false)=>{
       let arr=str.split("");
       arr=arr.map(el=>el==" "?"&nbsp;":el)
-      // arr=arr.map(el=>"<div>"+el+"</div>");
       arr=arr.map(el=>{
         let div=document.createElement('div');
         div.style.display="inline-block";
@@ -50,38 +70,35 @@ import styles from "./TextTest.module.scss"
         y:0,
         opacity:1
       },{
-        rotateX:-90,
-        y:40,
+        rotateX:-settings.rotate,
+        transformOrigin:settings.trOrOut,
+        y:settings.y,
         opacity:0,
-        stagger:0.06,
-        duration:0.3,
+        stagger:settings.staggerOut,
+        duration:settings.durationOut,
+        ease:settings.ease,
         onComplete:()=>{
             //remove old
-      removeWrappedText();
-      //append new
-      appendWrappedText(textArr[0]);
-      //rotate new
-      
-      gsap.fromTo(letters,{
-        rotateX:90,
-        opacity:0,
-        y:-40
-        // text:textArr[textArr.length-1]
-      },{
-        rotateX:0,
-        y:0,
-        duration:1,
-        opacity:1,
-        stagger:0.1,
+            removeWrappedText();
 
-        // text:{
-        //   value:textArr[0],
-        //   // newClass:styles["rotated-text"]
-        // },
-        // // rotateX:90,
-        ease:"power2.out",
+            //append new
+            appendWrappedText(textArr[0]);
 
-      });
+            //rotate new
+            gsap.fromTo(letters,{
+              rotateX:settings.rotate,
+              opacity:0,
+              y:-settings.y
+            },{
+              transformOrigin:settings.trOrIn,
+              rotateX:0,
+              y:0,
+              duration:settings.durationIn,
+              opacity:1,
+              stagger:settings.staggerIn,
+              ease:settings.ease,
+
+            });
 
         }
       })
@@ -90,39 +107,51 @@ import styles from "./TextTest.module.scss"
     }
 
 
-const inAnimation=()=>{
+const reveal=()=>{
 const q=gsap.utils.selector(props.appref);
-  gsap.fromTo([q(".page"),q("."+styles.container+">h2")],{
+  console.log(q("."+styles.header2));
+  console.log(q("."+styles.container+">h3"));
+  gsap.fromTo([q("."+styles.header2),q("."+styles.container+">h3")],{
     opacity:0,
-    x:-50
+    x:settings.xReveal
   },{
     opacity:1,
     x:0,
-    stagger:0.3
+    stagger:settings.staggerReveal,
+    duration:settings.durationReveal
   })
+  setIsRevealed(true);
 }
 
     useEffect(()=>{
-      removeWrappedText();
-      appendWrappedText(textArr[textArr.length-1],true);
-    inAnimation();   
-
-     const timerId=setInterval(()=>{
-        // console.log("Interval step");
+      let timerId;
+      console.log("isRevealde: "+isRevealed);
+      if(!isRevealed){
+        removeWrappedText();
+        appendWrappedText(textArr[textArr.length-1],true);
+        reveal();   
+      }
+      timerId=setInterval(()=>{
+        console.log("Interval step");
         // console.log(styles);
         rotateText();
 
-      },5000)
+      },settings.interval);
       return(()=>{
         clearInterval(timerId);
+        // setIsRevealed(false);
       })
-    })
+    },[isRevealed])
 
 
     return (
       <div className={styles.container}>
-        <h2 style={{opacity:0}}>Мы делаем</h2>
-        <div style={{opacity:0}} ref={divRef} className='page'>
+        <div className={styles.name}>
+          <h1 className={styles.header1}>AIZEM</h1>
+          <h3 className={styles.header3}>Агенство визуальной коммуникации</h3>
+        </div>
+        <h3 style={{opacity:0}} className={styles.header3}>Мы делаем</h3>
+          <div style={{opacity:0}} ref={divRef} className={styles.header2}>
           <h2 className={styles.letter}>Branding</h2>
         </div>
       </div>

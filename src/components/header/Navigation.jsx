@@ -1,13 +1,12 @@
 import gsap from 'gsap';
-import { NavLink,useNavigate,useLocation } from 'react-router-dom'
-import styles from "./Navigation.module.scss"
+import { NavLink,useNavigate,useLocation } from 'react-router-dom';
+import styles from "./Navigation.module.scss";
 import cardStyles from '../Card.module.scss';
 
 const routes=[
-  {path:"/", name:"Главная", i:0},
-  {path:"/projects", name:"Проекты", i:1},
-  {path:"/text-test", name:"Тест текста", i:2},
-
+  {path:"/", name:"Главная", i:0, animObjs:[".page"]},
+  {path:"/projects", name:"Проекты", i:1, animObjs:["."+cardStyles.card]},
+  {path:"/text-test", name:"Тест текста", i:2,animObjs:["h2",".page"]}
 ];
 
 
@@ -17,17 +16,34 @@ function Navigation(props) {
   let location=useLocation();
   const q = gsap.utils.selector(props.appref);
   
+  function getAnimQuerry(arr2,arr1,i){
+    if(arr1[i].animObjs.length>1){
+      arr1[i].animObjs.forEach((item,i)=>{
+        arr2[i]=q(item);
+        })
+      }
+    if(arr1[i].animObjs.length==1)
+      arr2=q(arr1[i].animObjs[0])
+
+      return arr2;
+  }
+
    const pageChange=(e,dest)=>{
 
-    if(!e.target.classList.contains("active")){
+    if(!e.target.classList.contains(styles.active)){ 
+      let querry=[];
+      let i=-1;
       e.preventDefault();
       switch (location.pathname) {
-        case "/":
-          gsap.to([q(".page"),q(".page")],{
+        case routes[0].path:  // путль главной страницы
+         i=0;
+         querry=getAnimQuerry(querry,routes,i);
+          //анимация ухода с главной страницы
+          gsap.to(querry,{
             opacity:0,
             y:50,
-            stagger:0.1,
-            // rotateX:90,
+            // stagger:0.1,
+            // rotateY:90,
             // height:0,
             onComplete:()=>{
                 navigate(dest);
@@ -35,8 +51,10 @@ function Navigation(props) {
             }
         });
           break;
-        case "/projects":
-          gsap.to(q("."+cardStyles.card),{
+        case routes[1].path:
+         i=1;
+         querry=getAnimQuerry(querry,routes,i);
+          gsap.to(querry,{
             opacity:0,
             x:50,
             stagger:0.1,
@@ -48,13 +66,15 @@ function Navigation(props) {
             }
         });
           break;
-        case "/text-test":
-          gsap.to([q("h2"),q(".page")],{
+        case routes[2].path:
+          i=2;
+          querry=getAnimQuerry(querry,routes,i);
+                    
+            // [q("h2"),q(".page")]
+          gsap.to(querry,{
             opacity:0,
             x:50,
             stagger:0.2,
-            // rotateX:90,
-            // height:0,
             onComplete:()=>{
                 navigate(dest);
                 // console.log("complete projects exit");
@@ -73,20 +93,14 @@ function Navigation(props) {
 
   return (
     <div className={styles.nav}>
-      {/* {routes.forEach(route => (
-        <NavLink key={route.i} onClick={(e)=>{pageChange(e,route.path);}} to={route.path}>{route.name}</NavLink>
-      ))} */}
-    {/* <NavLink onClick={(e)=>{pageChange(e,"/");}} to='/' >Главная</NavLink>
-    <NavLink onClick={(e)=>{pageChange(e,"/projects");}} to='/projects'>Проекты</NavLink> */}
-    
+    <img className={styles.logo} src='http://localhost:1337/uploads/AIZEM logo.png'></img>     
+    <div>
     {routes.map((route)=>(
-      <NavLink className={({ isActive }) => styles.a +" "+(isActive ? styles.active : "")}activeClassName={styles.active} key={route.i} onClick={(e)=>{pageChange(e,route.path);}} to={route.path}>{route.name}</NavLink>
+      <NavLink className={({ isActive }) => styles.a +" "+(isActive ? styles.active : "")} key={route.i} onClick={(e)=>{pageChange(e,route.path);}} to={route.path}>{route.name}</NavLink>
     ))}
-    
+    </div> 
     </div>
   )
 }
 
 export default Navigation
-
-// className=

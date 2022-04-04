@@ -5,15 +5,11 @@ import myContext from '../../Context'
 function SliderPair(props) {
 
     const {server, cursor, updateCursor}=useContext(myContext);
-    // const server=props.settings.server;
     const sliderData=props.sliderData;
     const [Images , setImages]=useState({noDesign:"",withDesign:""});
-    // const [i , setI]=useState(props.number);
-    // let i=;
 
 
     useEffect(()=>{
-        // console.log(sliderData);
        if (sliderData.length>0){
            if(sliderData[props.counter].noDesign.data.attributes.formats.large===undefined) 
             {
@@ -32,7 +28,6 @@ function SliderPair(props) {
        }
         
     },[sliderData.length,props.counter]); 
-    // console.log(styles);
     return (
         <g>
             {(sliderData.length>0) &&

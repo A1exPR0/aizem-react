@@ -1,3 +1,5 @@
+@import url('./font/stylesheet.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700;900&display=swap');
 
 *{
   --first-color:#F87444;
@@ -5,15 +7,19 @@
 
 }
 
-
+html{
+  font-size:1vmax;
+}
 
 body {
   /* padding: 5rem; */
+  font-family: 'RoadRadio';
   background-color:white;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  margin-right:10px;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

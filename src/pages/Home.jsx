@@ -1,11 +1,26 @@
-// import Cards from "../components/Cards";
+import Cards from "../components/Cards";
 import React, { useEffect, useState, useRef, useContext } from 'react'
+
 import NewSlider from "../components/slider/NewSlider";
+import TextTest from '../components/TextTest';
+import Button from '../components/Button';
+
+import styles from "./Home.module.scss"
 
 import gsap from 'gsap';
 import myContext from '../Context';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  // import { faSortDown } from '@fortawesome/free-solid-svg-icons'
 
+  const arrow = <FontAwesomeIcon icon="fa-solid fa-sort-down" />
+
+const settings={
+  sliderInterval:5000, // in ms
+  sliderX:100,
+  sliderDelay:0.3,
+  revealY:50
+};
 
 function Home(props) {
 
@@ -26,7 +41,7 @@ useEffect(()=>{
   getSliderData();
   gsap.fromTo(q2(".page"),{
     opacity:0,
-    y:50
+    y:settings.revealY
   },{
       opacity:1,
       y:0
@@ -40,34 +55,25 @@ useEffect(()=>{
 
 
     gsap.to(q("image"), {
-                x: -100,
+                x: -settings.sliderX,
                 opacity: 0,
               onComplete:()=>{
                 
-                // console.log("end of animation");
-                if(counter+1 < sliderData.length) {
-                  // console.log("increment");
-                  setCounter(counter+1);
-                }
-                else{
-                  // console.log("reset");
-                  // console.log(sliderData.length);
-                  setCounter(0);
-                }
-
+                if(counter+1 < sliderData.length) {setCounter(counter+1);}
+                else{setCounter(0);}
                 gsap.fromTo(q("image"), {
-                                    x: 100,
+                                    x: settings.sliderX,
                                     opacity: 0
                                 },{
                                   x:0,
                                   opacity:1,
-                                  delay:0.3
+                                  delay:settings.sliderDelay
                                 });        
 
               }});
 
   
-    },5000);
+    },settings.sliderInterval);
     return (()=>{
       clearInterval(timerID.current);
     })
@@ -79,7 +85,7 @@ useEffect(()=>{
 
     if(ls){
       setSliderData(JSON.parse(ls));
-        console.log("Data for slider set from Local storage");
+        // console.log("Data for slider set from Local storage");
 
     }
     else{
@@ -87,7 +93,7 @@ useEffect(()=>{
         const data = await response.json();
         
         localStorage.setItem('SliderData',JSON.stringify(data.data.attributes.pair));
-        console.log("Data for slider set from api call"); 
+        // console.log("Data for slider set from api call"); 
         // console.log(data.data.attributes.pair);
         setSliderData(data.data.attributes.pair);
         };
@@ -95,10 +101,18 @@ useEffect(()=>{
 
 }
 
-// console.log(sliderData);
+console.log(arrow);
   return (
-    <div className='page' ref={sliderRef} onMouseMove={updateCursor}>
+    <div className={'page'} ref={sliderRef} onMouseMove={updateCursor}>
+      <div className={styles.section}>
+        <TextTest appref={props.appref}/>
+        <div className={styles.buttons}>
+          <Button href="#" styling="orange">Свяжитесь с нами</Button>
+          <Button href="#" styling="white">Наши работы{arrow}</Button>
+        </div>
+      </div>
         <NewSlider sliderData={sliderData} counter={counter}/>
+
         {/* <Cards/> */}
     </div>
   )

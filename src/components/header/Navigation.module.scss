@@ -15,14 +15,23 @@
     }
 }
 .active{
-    color:var(--second-color);
+    color:black !important;
     transition: 0.5s color;
+    text-decoration: solid 2px black;
 }
 
 .nav{
+    margin:15px;
     display: flex;
     align-self: flex-end;
     align-items: flex-end;
     flex-wrap: wrap-reverse;
-    justify-content: right;
+    justify-content: space-between;
+    .logo{
+        width:3rem;
+        // justify-self: flex-end;
+        align-self: center;
+        margin-left:2rem;
+        
+    }
 }
