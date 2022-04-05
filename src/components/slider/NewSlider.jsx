@@ -5,7 +5,7 @@ import SliderPair from './SliderPair'
 import myContext from '../../Context'
 
 const settings={
-  yCompOffset:0.95,
+  yCompOffset:1,
   maskRadius:80,
   maskBlockSize:400,
   maskBlur:5
@@ -50,7 +50,16 @@ function NewSlider(props) {
             <feGaussianBlur stdDeviation={settings.maskBlur} />
           </filter>
           <mask id="mask">
-            <circle cx={cursor.x-(viewWidth-(svgHW.w!==undefined?svgHW.w:0))} cy={cursor.y-(viewHeight*settings.yCompOffset-(svgHW.h!==undefined?svgHW.h:0))} fill="white" r={settings.maskRadius} width={settings.maskBlockSize} height={settings.maskBlockSize} filter="url(#mask-blur)" />
+            <circle 
+                // cx={0}
+                // cy={0}
+                cx={cursor.x-(viewWidth-(svgHW.w!==undefined?svgHW.w:0))} 
+                cy={cursor.y-(viewHeight*settings.yCompOffset-(svgHW.h!==undefined?svgHW.h:0))} 
+                style={{top:cursor.y,left:cursor.x}}
+                fill="white" r={settings.maskRadius} 
+                width={settings.maskBlockSize} 
+                height={settings.maskBlockSize} 
+                filter="url(#mask-blur)" />
           </mask>
       </defs>  
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
+
 import styled from "styled-components"
 import gsap from 'gsap';
 import cardStyles from "./Card.module.scss"
@@ -59,7 +60,15 @@ const getWorks = async()=>{
     {works.map((work)=>{
         return(
           
-            <Card key={work.id} name={work.attributes.title} color={work.attributes.color} src={"http://localhost:1337"+work.attributes.thumbnail.data.attributes.formats.medium.url}/>     
+            <Card 
+                key={work.id} 
+                description={"Короткое описание проекта и того как мы над ним работали"} 
+                name={work.attributes.title} color={work.attributes.color} 
+                src={"http://localhost:1337"+work.attributes.thumbnail.data.attributes.formats.medium.url}
+                badges={["first badge","second badge"]}
+                badgesStyling={"orange-outline"}            
+            
+            />
            
         );
     })}
@@ -72,7 +81,7 @@ const Wrapper = styled.div`
     //background-color:red;
     display:flex;
     justify-content:center;
-    align-content:center;
+    // align-content:center;
     margin:auto;
     flex-direction:column;
     width:80%;
