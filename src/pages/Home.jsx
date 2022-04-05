@@ -11,9 +11,9 @@ import gsap from 'gsap';
 import myContext from '../Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  // import { faSortDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-  const arrow = <FontAwesomeIcon icon="fa-solid fa-sort-down" />
+  const arrow = <FontAwesomeIcon icon={faCaretDown} style={{marginLeft:"0.2em"}}/>
 
 const settings={
   sliderInterval:5000, // in ms
@@ -27,7 +27,6 @@ function Home(props) {
 const {server,updateCursor}=useContext(myContext);
 
 const[sliderData,setSliderData]=useState([]);
-
 const [counter,setCounter]=useState(0);
 
 const sliderRef=useRef();
@@ -101,7 +100,7 @@ useEffect(()=>{
 
 }
 
-console.log(arrow);
+// console.log(arrow);
   return (
     <div className={'page'} ref={sliderRef} onMouseMove={updateCursor}>
       <div className={styles.section}>
