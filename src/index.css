@@ -9,6 +9,7 @@
 
 html{
   font-size:1vmax;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -27,6 +28,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h2{
+  font-size: 3rem;
+  font-family: "RoadRadio";
+  font-weight: 700;
 }
 
 .App{

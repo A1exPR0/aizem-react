@@ -38,6 +38,7 @@ const q2 = gsap.utils.selector(props.appref);
 
 useEffect(()=>{
   getSliderData();
+  
   gsap.fromTo(q2(".page"),{
     opacity:0,
     y:settings.revealY
@@ -45,6 +46,7 @@ useEffect(()=>{
       opacity:1,
       y:0
   });
+
 },[])
 
 
@@ -107,12 +109,15 @@ useEffect(()=>{
         <TextTest appref={props.appref}/>
         <div className={styles.buttons}>
           <Button href="#" styling="orange">Свяжитесь с нами</Button>
-          <Button href="#" styling="white">Наши работы{arrow}</Button>
+          <Button href="#cases" styling="white">Наши работы{arrow}</Button>
         </div>
-      </div>
         <NewSlider sliderData={sliderData} counter={counter}/>
-
-        {/* <Cards/> */}
+      </div>
+     
+     <div className={styles.section} id="cases">
+     <h2>Последние Кейсы</h2>
+        <Cards appref={props.appref}/>
+      </div>
     </div>
   )
 }

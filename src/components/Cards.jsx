@@ -84,7 +84,7 @@ const Wrapper = styled.div`
     // align-content:center;
     margin:auto;
     flex-direction:column;
-    width:80%;
+    width:90%;
     position:relative;
     .card{
       opacity:0;

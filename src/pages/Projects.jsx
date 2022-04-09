@@ -7,6 +7,7 @@ function Projects(props) {
 
   return (
     <div className="page">
+      <div style={{width:"100vw",height:"100vh"}}></div>
     <Cards appref={props.appref}/>
     </div>
   )

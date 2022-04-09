@@ -35,7 +35,7 @@ function Navigation(props) {
       let i=-1;
       e.preventDefault();
       switch (location.pathname) {
-        case routes[0].path:  // путль главной страницы
+        case routes[0].path:  // путь главной страницы
          i=0;
          querry=getAnimQuerry(querry,routes,i);
           //анимация ухода с главной страницы
@@ -93,12 +93,18 @@ function Navigation(props) {
 
   return (
     <div className={styles.nav}>
-    <img className={styles.logo} src='http://localhost:1337/uploads/AIZEM logo.png'></img>     
-    <div>
-    {routes.map((route)=>(
-      <NavLink className={({ isActive }) => styles.a +" "+(isActive ? styles.active : "")} key={route.i} onClick={(e)=>{pageChange(e,route.path);}} to={route.path}>{route.name}</NavLink>
-    ))}
-    </div> 
+      <img className={styles.logo} src='http://localhost:1337/uploads/AIZEM logo.png'></img>     
+      <div>
+        {routes.map((route)=>(
+          <NavLink 
+              className={({ isActive }) => styles.a +" "+(isActive ? styles.active : "")} 
+              key={route.i} 
+              onClick={(e)=>{pageChange(e,route.path);}} 
+              to={route.path}>
+                {route.name}
+          </NavLink>
+        ))}
+      </div> 
     </div>
   )
 }

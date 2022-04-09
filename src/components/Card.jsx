@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Card.module.scss'
 import Badge from './Badge';
 import {gsap} from "gsap"
-import { element } from 'prop-types';
+
 
 
 const settings={
@@ -36,20 +36,35 @@ class Card extends React.Component {
 updateRotation=(e)=>{
 
     let itemContainer=e.currentTarget;
+    // console.log(e);
 
-
-    var pageX = e.pageX;
-		var pageY = e.pageY;
-		var itemX = itemContainer.offsetLeft+itemContainer.offsetParent.offsetLeft;
-		var itemY = itemContainer.offsetTop+itemContainer.offsetParent.offsetTop;
-		var itemW = itemContainer.clientWidth;
+    // положение курсора в документе
+    var pageX = e.pageX;//clientX;//
+		var pageY = e.pageY;//clientY;//
+    // console.log(pageX,pageY);
+   
+    
+    //положение карточки
+    let box=itemContainer.getBoundingClientRect();
+    // console.log(box.x,box.y);
+    let windowX=window.pageXOffset;
+    let windowY=window.pageYOffset;
+    var itemX = box.x+windowX;//itemContainer.offsetLeft+itemContainer.offsetParent.offsetLeft;
+		var itemY = box.y+windowY;//itemContainer.offsetTop+itemContainer.offsetParent.offsetTop;
+    // console.log(itemX,itemY);
+		
+    //размеры карточки
+    var itemW = itemContainer.clientWidth;
 		var itemH = itemContainer.clientHeight;
+    // console.log(itemW,itemH);
 
-		var percentX = (pageX-itemX)/itemW*100-17;
-		var percentY = (pageY-itemY)/itemH*100-25;
+    //процент смещения курсора по карточки от -1 до 1
+		var percentX = (pageX-itemX)/itemW*100;//-17;
+		var percentY = (pageY-itemY)/itemH*100;//-25;
     percentX=(percentX-50)/50;
     percentY=(percentY-50)/50;
     // console.log(percentX,percentY);
+
 
     let factorX=10;
     let factorY=20;
@@ -75,6 +90,7 @@ updateRotation=(e)=>{
     // else bg="radial-gradient(circle at center, rgba(255, 255, 255, "+alpha+"), transparent 50%)";
     // bg="red";
     // console.log(this.q("."+styles.dark));
+    // if(percentX<45 && percentX>-45 && percentY<45 && percentY>-45)
     gsap.to(this.q("."+styles.card),{
                       rotateX:rotateX,
                       rotateY:rotateY,
@@ -83,7 +99,7 @@ updateRotation=(e)=>{
                       ease:"none",
                       duration:settings.rotateDuration,
                       delay:settings.rotateDelay,
-                      boxShadow:(percentX+1)*factorY+"px "+(percentY-1)*-factorX+"px "+(percentX+1.5)*5+"px 0px rgba(0, 0, 0, 0.15)"
+                      boxShadow:(percentX+1)*factorY+"px "+(percentY-1)*-factorX+"px "+(percentX+1.2)*6+"px 0px rgba(0, 0, 0, 0.15)"
                     });
     gsap.to(this.q("."+styles.light),{
                       y:itemH/2,
@@ -98,11 +114,11 @@ updateRotation=(e)=>{
                       background:bg
                     });
     gsap.to(this.q("."+styles.pic),{
-                      y:percentY*factorX/1.5,
-                      x:percentX*factorY/1.5,
-                      skewX:-percentX/3,
-                      skewY:percentY/3,
-                      scale:1.03,
+                      y:percentY*factorX/-2,
+                      x:percentX*factorY/2.5,
+                      // skewX:-percentX/3.5,
+                      // skewY:percentY/3.5,
+                      scale:1.02,
                       transformOrigin:"100% 50%",
                       // boxShadow:"0px 0px 5px 0px inset rgba(0,0,0,0.4)"
                     });                
@@ -139,13 +155,20 @@ render(){
   return (
    
     <div ref={this.ref1} className={styles.container}>
-      <div  ref={this.ref2} className={styles.card}  onMouseLeave={()=>this.restoreCard()} onMouseMove={this.updateRotation}> 
+      <div  ref={this.ref2} className={styles.card}  
+            onMouseLeave={()=>this.restoreCard()} 
+            onMouseMove={this.updateRotation}> 
         <img className={styles.pic} src={this.props.src} alt="" />
         <div className={styles.info}>
           <h2>{this.props.name}</h2>
           <p>{this.props.description}</p>
           <div className={styles.badges}>
-            {this.props.badges.map((element)=>(<Badge key={element} styling={this.props.badgesStyling}>{element}</Badge>))}
+            {this.props.badges.map((element)=>(
+            <Badge 
+              key={element} 
+              styling={this.props.badgesStyling}>
+                {element}
+            </Badge>))}
           </div>
         </div>
         <div className={styles.light}></div> 

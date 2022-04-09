@@ -7,7 +7,7 @@ import styles from "./TextTest.module.scss"
 
     const [isRevealed,setIsRevealed]=useState(false);
     
-    const textArr=["Web Design", "Strategy","Design Sprint","Branding"];
+    const textArr=["Web Design", "Strategy","Design Sprint","Branding","Packaging"];
     
     const settings = {
         staggerOut: 0.06,
