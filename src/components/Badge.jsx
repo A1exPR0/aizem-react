@@ -6,10 +6,13 @@ function Badge(props) {
 //   console.log(styles);
   
   switch (props.styling) {
-      case "orange-outline":
-          styling=styles.orangeOutline;
-          break;
-          
+    case "orange-outline":
+        styling=styles.orangeOutline;
+        break;
+    case "green-solid":
+        styling=styles.greenSolid;
+        break;
+        
           default:
               styling=styles.orangeOutline;
               break;

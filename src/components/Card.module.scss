@@ -5,7 +5,7 @@
     position: relative;
     margin:70px 0;
     align-self: flex-start;
-    &:nth-of-type(odd){
+    &:nth-of-type(even){
         align-self: flex-end;
     }
 }

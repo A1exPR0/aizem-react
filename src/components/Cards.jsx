@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Card from './Card';
 
-import styled from "styled-components"
+import styles from "./Cards.module.scss"
 import gsap from 'gsap';
 import cardStyles from "./Card.module.scss"
 
@@ -56,7 +56,7 @@ const getWorks = async()=>{
 }
 
   return (
-    <Wrapper >
+    <div className={styles.wrapper}>
     {works.map((work)=>{
         return(
           
@@ -72,25 +72,9 @@ const getWorks = async()=>{
            
         );
     })}
-    </Wrapper>
+    </div>
 
   )
 }
-
-const Wrapper = styled.div`
-    //background-color:red;
-    display:flex;
-    justify-content:center;
-    // align-content:center;
-    margin:auto;
-    flex-direction:column;
-    width:90%;
-    position:relative;
-    .card{
-      opacity:0;
-    }
-
-    
-`;
 
 export default Cards

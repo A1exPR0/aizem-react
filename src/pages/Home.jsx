@@ -1,4 +1,5 @@
 import Cards from "../components/Cards";
+import SevicesToggler from "../components/SevicesToggler";
 import React, { useEffect, useState, useRef, useContext } from 'react'
 
 import NewSlider from "../components/slider/NewSlider";
@@ -110,7 +111,7 @@ useEffect(()=>{
       <div className={styles.section}>
         <TextTest appref={props.appref}/>
         <div className={styles.buttonsTop}>
-          <Button href="#" styling="orange">Свяжитесь с нами</Button>
+          <Button href="#" styling="orange-outline">Свяжитесь с нами</Button>
           <Button href="#cases" styling="white">Наши работы {arrowD}</Button>
         </div>
         <NewSlider sliderData={sliderData} counter={counter}/>
@@ -122,7 +123,11 @@ useEffect(()=>{
         <div className={styles.buttonAllWorks}>
         <Button href="#" styling="white">Все работы {arrowR}</Button>
         </div>
-      </div>
+    </div>
+    <div className={styles.section} id="services">
+      <h2>Мы делаем</h2>
+      <SevicesToggler></SevicesToggler>
+    </div>
     </div>
   )
 }
