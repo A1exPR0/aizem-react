@@ -5,11 +5,22 @@
     box-sizing: border-box;
 }
 
-.buttons{
+.buttonsTop{
     margin-top:8rem;
     display:flex;
     width:50%;
     height: 50px;
     position:relative;
     z-index: 10;
+}
+
+.buttonAllWorks{
+    margin-top:3rem;
+    padding-bottom: 8rem;
+    display:flex;
+    width:95%;
+    // height: 50px;
+    position:relative;
+    z-index: 10;
+    justify-content: flex-end;
 }

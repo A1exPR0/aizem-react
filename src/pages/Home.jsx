@@ -12,8 +12,10 @@ import myContext from '../Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-  const arrow = <FontAwesomeIcon icon={faCaretDown} style={{marginLeft:"0.2em"}}/>
+  const arrowD = <FontAwesomeIcon icon={faCaretDown} style={{marginLeft:"0.2em"}}/>
+  const arrowR = <FontAwesomeIcon icon={faCaretRight}style={{marginTop:"0.2em"}}/>
 
 const settings={
   sliderInterval:5000, // in ms
@@ -107,9 +109,9 @@ useEffect(()=>{
     <div className={'page'} ref={sliderRef} onMouseMove={updateCursor}>
       <div className={styles.section}>
         <TextTest appref={props.appref}/>
-        <div className={styles.buttons}>
+        <div className={styles.buttonsTop}>
           <Button href="#" styling="orange">Свяжитесь с нами</Button>
-          <Button href="#cases" styling="white">Наши работы{arrow}</Button>
+          <Button href="#cases" styling="white">Наши работы {arrowD}</Button>
         </div>
         <NewSlider sliderData={sliderData} counter={counter}/>
       </div>
@@ -117,6 +119,9 @@ useEffect(()=>{
      <div className={styles.section} id="cases">
      <h2>Последние Кейсы</h2>
         <Cards appref={props.appref}/>
+        <div className={styles.buttonAllWorks}>
+        <Button href="#" styling="white">Все работы {arrowR}</Button>
+        </div>
       </div>
     </div>
   )
