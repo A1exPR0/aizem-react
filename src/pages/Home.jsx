@@ -1,7 +1,8 @@
-import Cards from "../components/Cards";
-import SevicesToggler from "../components/SevicesToggler";
 import React, { useEffect, useState, useRef, useContext } from 'react'
 
+import Cards from "../components/Cards";
+import SevicesToggler from "../components/SevicesToggler";
+import ContactForm from '../components/ContactForm';
 import NewSlider from "../components/slider/NewSlider";
 import TextTest from '../components/TextTest';
 import Button from '../components/Button';
@@ -63,8 +64,10 @@ useEffect(()=>{
                 opacity: 0,
               onComplete:()=>{
                 
-                if(counter+1 < sliderData.length) {setCounter(counter+1);}
-                else{setCounter(0);}
+                if(counter+1 < sliderData.length) 
+                  {setCounter(counter+1);}
+                else
+                  {setCounter(0);}
                 gsap.fromTo(q("image"), {
                                     x: settings.sliderX,
                                     opacity: 0
@@ -111,7 +114,7 @@ useEffect(()=>{
       <div className={styles.section}>
         <TextTest appref={props.appref}/>
         <div className={styles.buttonsTop}>
-          <Button href="#" styling="orange-outline">Свяжитесь с нами</Button>
+          <Button href="#" styling="orange">Свяжитесь с нами</Button>
           <Button href="#cases" styling="white">Наши работы {arrowD}</Button>
         </div>
         <NewSlider sliderData={sliderData} counter={counter}/>
@@ -128,8 +131,9 @@ useEffect(()=>{
       <h2>Мы делаем</h2>
       <SevicesToggler></SevicesToggler>
     </div>
+      <ContactForm></ContactForm>
     </div>
-  )
+  ) 
 }
 
 export default Home
