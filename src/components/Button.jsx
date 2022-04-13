@@ -17,10 +17,25 @@ function Button(props) {
             style=styles.a;
             break;
     }
+    
+    let isSubmit=false;
+
+    switch(props.type){
+        case "submit":
+            isSubmit=true;
+            break;
+        default:
+            isSubmit=false;
+    }
 
   return (
     <div className={styles.wrapper}>
-        <a href={props.href} className={style} onClick={props.callback}>{props.children} </a>
+        {isSubmit &&
+            <button className={style} type='submit'>{props.children}</button>
+        }
+        {!isSubmit &&
+            <a href={props.href} className={style} onClick={props.callback}>{props.children} </a>
+        }
         <span className={styles.boxunder}>{props.children}</span>
     </div>
 

@@ -2,7 +2,7 @@
     // background-color: var(--second-color);
     margin-top: 10rem;
     width:100%;
-    height:100vh;
+    height:110vh;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -28,6 +28,22 @@
         flex-direction: column;
         label{
             visibility: hidden;
+        }
+        .error{
+            text-align: right;
+            color:var(--first-color);
+            font-size:1.3rem;
+            transform: translate(0,-4rem);
+            font-weight:700;
+            width:fit-content;
+            margin-left:auto;
+        }
+        .succes{
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            color:white;
+            font-size: 1.5rem;
         }
         input:not([type="submit"]), textarea{
             width:100%;
@@ -68,19 +84,12 @@
         textarea{
             margin-bottom: 4rem;
             resize:none;
-            height: max-content;
+            font-size: 1.2rem;
+            font-weight: 400;
+            height: 15vmin;
             line-height: 2rem;
             position: relative;
-            &::before{
-                content: "sss";
-                height: 3rem;
-                background-color: black;
-                display: inline-block;
-                z-index: 2;
-                width:200px;
-                position: relative;
-                flex-direction: column;
-            }
+            
 
         }
         h3{
