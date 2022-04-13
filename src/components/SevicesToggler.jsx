@@ -19,33 +19,32 @@ function SevicesToggler() {
 
   const changeCurrent = (i)=>{
     //remove old
-
-    gsap.to(q("."+styles.serviceCard),{
-      x:50,
-      opacity:0,
-      onComplete:()=>{
-        console.log(i);
-        //update current
-        setCurrent(i);
-        //reveal new
-        gsap.fromTo(q("."+styles.serviceCard),{
-          x:50,
-          opacity:0
-        },{
-          x:0,
-          opacity:1
-        })
-      }
-    })
-    
-
+    if(i!==current){
+      gsap.to(q("."+styles.serviceCard),{
+        x:50,
+        opacity:0,
+        onComplete:()=>{
+          console.log(i);
+          //update current
+          setCurrent(i);
+          //reveal new
+          gsap.fromTo(q("."+styles.serviceCard),{
+            x:50,
+            opacity:0
+          },{
+            x:0,
+            opacity:1
+          })
+        }
+      })  
+    }
   }
 
   return (
     <div className={styles.wrapper}>
         <div className={styles.buttons}>
           {servicesData.map((el,index)=>{
-            return <a key={index}  onClick={(e)=>changeCurrent(index)} className={index==current?styles.buttonActive:styles.button}>{el.title}</a>
+            return <button key={index}  onClick={(e)=>changeCurrent(index)} className={index==current?styles.buttonActive:styles.button}>{el.title}</button>
           })}
         </div>
         <div className={styles.cardContainer} ref={contRef}>

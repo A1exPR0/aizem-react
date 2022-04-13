@@ -1,0 +1,39 @@
+.container{
+    width:100vw;
+    // height:5rem;
+    background-color: #efefef;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .col{
+        display: flex;
+        // flex-direction: column;
+        width:30%;
+        box-sizing: border-box;
+        padding: 3rem;
+        font-family: "Montserrat";
+        svg{
+            padding:1rem;
+        }
+        &:last-child{
+            text-align: right;
+            justify-content: flex-end;
+        }
+        &:first-child{
+            text-align: left;
+        }
+        div{
+            padding:0 1rem;
+            line-height: 2rem;
+            a{
+                color:var(--second-color);
+                text-decoration: none;
+
+            }
+           
+        }
+    }
+   
+
+}

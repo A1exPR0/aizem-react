@@ -6,6 +6,8 @@ import ContactForm from '../components/ContactForm';
 import NewSlider from "../components/slider/NewSlider";
 import TextTest from '../components/TextTest';
 import Button from '../components/Button';
+import Clients from '../components/Clients';
+import Footer from '../components/Footer';
 
 import styles from "./Home.module.scss"
 
@@ -131,7 +133,10 @@ useEffect(()=>{
       <h2>Мы делаем</h2>
       <SevicesToggler></SevicesToggler>
     </div>
-      <ContactForm></ContactForm>
+      <Clients>Наши клиенты</Clients>
+
+      <ContactForm>Мы рады знакомству</ContactForm>
+      <Footer></Footer>
     </div>
   ) 
 }

@@ -9,7 +9,7 @@ const settings={
   revealY:50,
   revealStagger:0.3,
   revealDuration:0.8,
-  fetchStr:'http://localhost:1337/api/works?populate=thumbnail',
+  fetchStr:'http://localhost:1337/api/works?populate=cover',
 }
 
 function Cards(props) {
@@ -59,12 +59,11 @@ const getWorks = async()=>{
     <div className={styles.wrapper}>
     {works.map((work)=>{
         return(
-          
             <Card 
                 key={work.id} 
                 description={"Короткое описание проекта и того как мы над ним работали"} 
                 name={work.attributes.title} color={work.attributes.color} 
-                src={"http://localhost:1337"+work.attributes.thumbnail.data.attributes.formats.medium.url}
+                src={"http://localhost:1337"+work.attributes.cover.data.attributes.formats.medium.url}
                 badges={["first badge","second badge"]}
                 badgesStyling={"orange-outline"}            
             

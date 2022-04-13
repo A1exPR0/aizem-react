@@ -20,7 +20,7 @@ function Button(props) {
 
   return (
     <div className={styles.wrapper}>
-        <a href={props.href} className={style}>{props.children}</a>
+        <a href={props.href} className={style} onClick={props.callback}>{props.children} </a>
         <span className={styles.boxunder}>{props.children}</span>
     </div>
 

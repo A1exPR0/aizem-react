@@ -11,19 +11,82 @@
     svg{
         position: absolute;
         top:0;
-        left: -150px;
+        left: -125px;
         width:110vw;
-        z-index: 0;
+        z-index: -2;
         height:100%;
         fill: var(--second-color);
     }
-
+    
     form{
 
-        // display: block;
+        display: flex;
         position: relative;
-        background-color: white;
-        min-width: 350px;
+        // background-color: white;
+        min-width:550px;
         min-height: 400px;
+        flex-direction: column;
+        label{
+            visibility: hidden;
+        }
+        input:not([type="submit"]), textarea{
+            width:100%;
+            color:#fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background-color: transparent !important;
+            font-family: "Montserrat";
+            border: none;
+            border-bottom: 2px solid rgba($color: #fff, $alpha: 0.5);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1rem;
+                
+                &::placeholder{
+                    color:white;
+                    opacity: 0.5;
+                    font-weight: 400;
+                    font-size: 1.2rem;
+                    transition: 0.5s;
+                    // &:focus{
+
+                    // }
+                }
+                &:focus{
+                    outline: none;
+                    border-bottom: 2px solid var(--first-color);
+                    &::placeholder{
+                        transform:translate(0,-1.5rem);
+                        font-size: 1rem;
+                        font-weight: 600;
+                        opacity: 1;
+                        transition: all 0.5s;
+
+                    }                       
+                }
+        }
+        textarea{
+            margin-bottom: 4rem;
+            resize:none;
+            height: max-content;
+            line-height: 2rem;
+            position: relative;
+            &::before{
+                content: "sss";
+                height: 3rem;
+                background-color: black;
+                display: inline-block;
+                z-index: 2;
+                width:200px;
+                position: relative;
+                flex-direction: column;
+            }
+
+        }
+        h3{
+            color: white;
+            font-size: 2rem;
+            align-self: center;
+        }
     }
 }

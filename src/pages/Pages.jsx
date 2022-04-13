@@ -14,13 +14,14 @@ const routes=[
 function Pages(props) {
 
 
-  return (<>
+  return (
+
     <Routes>
       {routes.map(({path,Component,i})=>(
         <Route key={i} path={path} element={<Component appref={props.appref}/>}/>
       ))}
     </Routes>
-    </>
+
   )
 }
 
